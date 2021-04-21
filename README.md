@@ -6,7 +6,11 @@
 ## Descripton
 
 This application allows users to create, update and delete shirts with prices and stock. The purpose of this application is to practice creating CRUD functionality using React.
-* * *
+
+## Component Diagram
+
+<div><img src="src/img/MerchStore.png" width = 800></div>
+
 ## Technologies used
 
 * React
