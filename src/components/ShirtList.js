@@ -1,19 +1,28 @@
 import React from 'react';
 import Shirt from "./Shirt";
 
-function ShirtList(){
+function ShirtList(props){
   return(
     <React.Fragment>
       <h4>shirt list</h4>
-      <Shirt
-        name={"Blouse"}
-        description={"Really amazing blouse"}
-        quantity={1}
-        price={"32.99"}
-      />
+      {props.shirtList.map((shirt)=>
+        <Shirt
+        whenShirtClicked={props.onShirtSelection}
+
+        name={shirt.name}
+        description={shirt.description}
+        quantity={shirt.quantity}
+        price={shirt.price}
+        id={shirt.id}
+        key={shirt.id}
+        />
+        )}
     </React.Fragment>
   );
 }
+
+
+
 
 export default ShirtList;
 
