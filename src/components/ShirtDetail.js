@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // import Shirt from "./Shirt";
 
 function ShirtDetail(props){
-  const{shirt, onClickingEdit }=props;
+  const{shirt, onClickingEdit }= props;
 
   return (
     <React.Fragment>

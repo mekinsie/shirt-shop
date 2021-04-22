@@ -21,7 +21,8 @@ class ShirtControl extends React.Component {
     if(this.state.selectedShirt != null){
       this.setState({
         formVisibleOnPage: false,
-        selectedShirt: null
+        selectedShirt: null,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -66,7 +67,7 @@ class ShirtControl extends React.Component {
       currentlyVisibleState= <NewShirtForm onNewShirtCreation={this.handleAddingNewShirt}/>
       buttonText="Back to All Shirts"
     } else if (this.state.selectedShirt!=null){
-      currentlyVisibleState = <ShirtDetail shirt = {this.state.selectedShirt} />
+      currentlyVisibleState = <ShirtDetail onClickingEdit={this.handleEditClick} shirt = {this.state.selectedShirt} />
       buttonText="Back to All Shirts"
     }
       else {
