@@ -36,6 +36,14 @@ class ShirtControl extends React.Component {
     this.setState({editing: true});
   }
 
+  handleDeletingShirt = (id) => {
+    const newMasterShirtList = this.state.masterShirtList.filter(shirt => shirt.id !== id);
+    this.setState({
+      masterShirtList: newMasterShirtList,
+      selectedShirt: null
+    });
+  }
+
   handleAddingNewShirt = (newShirt) => {
     const newMasterShirtList = this.state.masterShirtList.concat(newShirt);
     this.setState({masterShirtList: newMasterShirtList, formVisibleOnPage: false});
@@ -67,7 +75,7 @@ class ShirtControl extends React.Component {
       currentlyVisibleState= <NewShirtForm onNewShirtCreation={this.handleAddingNewShirt}/>
       buttonText="Back to All Shirts"
     } else if (this.state.selectedShirt!=null){
-      currentlyVisibleState = <ShirtDetail onClickingEdit={this.handleEditClick} shirt = {this.state.selectedShirt} />
+      currentlyVisibleState = <ShirtDetail onClickingEdit={this.handleEditClick} onClickingDelete={this.handleDeletingShirt} shirt = {this.state.selectedShirt} />
       buttonText="Back to All Shirts"
     }
       else {
