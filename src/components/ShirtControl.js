@@ -31,6 +31,38 @@ class ShirtControl extends React.Component {
     }
   }
 
+  handleEditingShirt = (shirtToEdit) => {
+    const editedMasterShirtList = this.state.masterShirtList
+    .filter(shirt => shirt.id !== this.state.selectedShirt.id)
+    .concat(shirtToEdit);
+    this.setState({
+      masterShirtList: editedMasterShirtList,
+      editing: false,
+      selectedShirt: null
+    });
+  }
+
+  handleIncreaseQuantity = (shirtToIncrease) => {
+    // console.log("you have reached increase the button thing");
+    // console.log(shirtToIncrease);
+
+    const shirt = this.state.masterShirtList.filter(shirt => shirt.id === this.state.selectedShirt.id)[0]
+    parseInt(shirt.quantity)
+
+    const editedMasterShirtList = this.state.masterShirtList
+    .filter(shirt => shirt.id !== this.state.selectedShirt.id)
+    .concat(editedShirt);
+    this.setState({
+      masterShirtList: editedMasterShirtList,
+      // editing: false,
+      // selectedShirt: null
+    });
+
+  }
+  // handleDecreaseQuantity = (id) => {
+  //   console.log("you have reached decrease the button thing");
+  // }
+
   handleEditClick = () => {
     console.log("handleEditClick reached!");
     this.setState({editing: true});
@@ -49,17 +81,6 @@ class ShirtControl extends React.Component {
     this.setState({masterShirtList: newMasterShirtList, formVisibleOnPage: false});
   }
 
-  handleEditingShirt = (shirtToEdit) => {
-    const editedMasterShirtList = this.state.masterShirtList
-    .filter(shirt => shirt.id !== this.state.selectedShirt.id)
-    .concat(shirtToEdit);
-    this.setState({
-      masterShirtList: editedMasterShirtList,
-      editing: false,
-      selectedShirt: null
-    });
-  }
-
   handleChangingSelectedShirt = (id) => {
     const selectedShirt = this.state.masterShirtList.filter(shirt => shirt.id === id)[0];
     this.setState({selectedShirt: selectedShirt})
@@ -75,7 +96,7 @@ class ShirtControl extends React.Component {
       currentlyVisibleState= <NewShirtForm onNewShirtCreation={this.handleAddingNewShirt}/>
       buttonText="Back to All Shirts"
     } else if (this.state.selectedShirt!=null){
-      currentlyVisibleState = <ShirtDetail onClickingEdit={this.handleEditClick} onClickingDelete={this.handleDeletingShirt} shirt = {this.state.selectedShirt} />
+      currentlyVisibleState = <ShirtDetail onIncreaseQuantity = {this.handleIncreaseQuantity } onClickingEdit={this.handleEditClick} onClickingDelete={this.handleDeletingShirt} shirt = {this.state.selectedShirt} />
       buttonText="Back to All Shirts"
     }
       else {
