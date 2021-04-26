@@ -1,7 +1,7 @@
 
 # Shirt Shop
 
-### Authored by: Dani Renner & Mekinsie Callahan
+### Authored by: Dani Renner, Mekinsie Callahan, Morgan Bradford
 * * *
 ## Descripton
 
@@ -61,6 +61,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 > [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)\
 > Mekinsie Callahan &copy; 2021  
 > Dani Renner &copy; 2021  
+> Morgan Bradford &copy; 2021  
 
 * * *
 
