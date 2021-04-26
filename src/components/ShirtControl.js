@@ -4,7 +4,7 @@ import ShirtList from "./ShirtList";
 import ShirtDetail from "./ShirtDetail";
 import EditShirtForm from "./EditShirtForm";
 import { connect } from "react-redux";
-
+import PropTypes from 'prop-types';
 
 class ShirtControl extends React.Component {
 
@@ -82,7 +82,7 @@ class ShirtControl extends React.Component {
   }
 
   handleChangingSelectedShirt = (id) => {
-    const selectedShirt = this.state.masterShirtList.filter(shirt => shirt.id === id)[0];
+    const selectedShirt = this.props.masterShirtList[id];
     this.setState({selectedShirt: selectedShirt})
   }
 
@@ -100,7 +100,7 @@ class ShirtControl extends React.Component {
       buttonText="Back to All Shirts"
     }
       else {
-      currentlyVisibleState = <ShirtList shirtList={this.state.masterShirtList} onShirtSelection={this.handleChangingSelectedShirt} />;
+      currentlyVisibleState = <ShirtList shirtList={this.props.masterShirtList} onShirtSelection={this.handleChangingSelectedShirt} />;
       buttonText= "Add a new shirt";
     }
 
@@ -114,6 +114,16 @@ class ShirtControl extends React.Component {
 
 }
 
-ShirtControl = connect()(ShirtControl);
+ShirtControl.propTypes = {
+  masterShirtList:PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterShirtList: state
+  }
+}
+
+ShirtControl = connect(mapStateToProps)(ShirtControl);
 
 export default ShirtControl;
