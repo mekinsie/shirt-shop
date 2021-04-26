@@ -55,9 +55,13 @@ class ShirtControl extends React.Component {
   }
 
   handleDeletingShirt = (id) => {
-    const newMasterShirtList = this.state.masterShirtList.filter(shirt => shirt.id !== id);
+    const { dispatch } = this.props;
+    const action = {
+      type: "DELETE_TICKET",
+      id: id
+    }
+    dispatch(action);
     this.setState({
-      masterShirtList: newMasterShirtList,
       selectedShirt: null
     });
   }
