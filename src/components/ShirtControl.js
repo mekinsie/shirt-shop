@@ -3,6 +3,7 @@ import NewShirtForm from "./NewShirtForm";
 import ShirtList from "./ShirtList";
 import ShirtDetail from "./ShirtDetail";
 import EditShirtForm from "./EditShirtForm";
+import { connect } from "react-redux";
 
 
 class ShirtControl extends React.Component {
@@ -10,7 +11,6 @@ class ShirtControl extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      masterShirtList: [],
       formVisibleOnPage: false,
       selectedShirt: null,
       editing: false
@@ -32,11 +32,18 @@ class ShirtControl extends React.Component {
   }
 
   handleEditingShirt = (shirtToEdit) => {
-    const editedMasterShirtList = this.state.masterShirtList
-    .filter(shirt => shirt.id !== this.state.selectedShirt.id)
-    .concat(shirtToEdit);
+    const { dispatch } = this.props;
+    const { id, name, description, price, quantity } = shirtToEdit;
+    const action = {
+      type: "ADD_ITEM",
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      quantity: quantity
+    }
+    dispatch(action);
     this.setState({
-      masterShirtList: editedMasterShirtList,
       editing: false,
       selectedShirt: null
     });
@@ -56,8 +63,18 @@ class ShirtControl extends React.Component {
   }
 
   handleAddingNewShirt = (newShirt) => {
-    const newMasterShirtList = this.state.masterShirtList.concat(newShirt);
-    this.setState({masterShirtList: newMasterShirtList, formVisibleOnPage: false});
+    const { dispatch } = this.props;
+    const { id, name, description, price, quantity } = newShirt;
+    const action = {
+      type: "ADD_ITEM",
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      quantity: quantity
+    }
+    dispatch(action);
+    this.setState({formVisibleOnPage: false});
   }
 
   handleChangingSelectedShirt = (id) => {
@@ -92,5 +109,7 @@ class ShirtControl extends React.Component {
   }
 
 }
+
+ShirtControl = connect()(ShirtControl);
 
 export default ShirtControl;
