@@ -42,27 +42,6 @@ class ShirtControl extends React.Component {
     });
   }
 
-  handleIncreaseQuantity = (shirtToIncrease) => {
-    // console.log("you have reached increase the button thing");
-    // console.log(shirtToIncrease);
-
-    const shirt = this.state.masterShirtList.filter(shirt => shirt.id === this.state.selectedShirt.id)[0]
-    parseInt(shirt.quantity)
-
-    const editedMasterShirtList = this.state.masterShirtList
-    .filter(shirt => shirt.id !== this.state.selectedShirt.id)
-    .concat(editedShirt);
-    this.setState({
-      masterShirtList: editedMasterShirtList,
-      // editing: false,
-      // selectedShirt: null
-    });
-
-  }
-  // handleDecreaseQuantity = (id) => {
-  //   console.log("you have reached decrease the button thing");
-  // }
-
   handleEditClick = () => {
     console.log("handleEditClick reached!");
     this.setState({editing: true});
