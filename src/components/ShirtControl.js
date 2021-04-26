@@ -11,7 +11,6 @@ class ShirtControl extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      formVisibleOnPage: false,
       selectedShirt: null,
       editing: false
     };
@@ -20,14 +19,15 @@ class ShirtControl extends React.Component {
   handleClick = () => {
     if(this.state.selectedShirt != null){
       this.setState({
-        formVisibleOnPage: false,
         selectedShirt: null,
         editing: false
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage
-      }));
+      const { dispatch } = this.props;
+      const action = {
+        type: "TOGGLE_FORM"
+      }
+      dispatch(action);
     }
   }
 
@@ -78,7 +78,10 @@ class ShirtControl extends React.Component {
       quantity: quantity
     }
     dispatch(action);
-    this.setState({formVisibleOnPage: false});
+    const action2 = {
+      type: "TOGGLE_FORM"
+    }
+    dispatch(action2);
   }
 
   handleChangingSelectedShirt = (id) => {
@@ -92,7 +95,7 @@ class ShirtControl extends React.Component {
     if(this.state.editing){
       currentlyVisibleState = <EditShirtForm shirt = {this.state.selectedShirt} onEditShirt = {this.handleEditingShirt} />
       buttonText = "Return to list of shirts"
-    } else if (this.state.formVisibleOnPage){
+    } else if (this.props.formVisibleOnPage){
       currentlyVisibleState= <NewShirtForm onNewShirtCreation={this.handleAddingNewShirt}/>
       buttonText="Back to All Shirts"
     } else if (this.state.selectedShirt!=null){
@@ -115,12 +118,14 @@ class ShirtControl extends React.Component {
 }
 
 ShirtControl.propTypes = {
-  masterShirtList:PropTypes.object
+  masterShirtList:PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    masterShirtList: state
+    masterShirtList: state.masterShirtList,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
